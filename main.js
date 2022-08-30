@@ -140,17 +140,18 @@ fetch("https://northwind.vercel.app/api/orders")
         sumS +=
           dtl.unitPrice * dtl.quantity -
           dtl.unitPrice * dtl.quantity * dtl.discount;
-          sumSweden+=sumS
-      });
+        });
+      sumSweden+=sumS
       if(max < sumS){
         max = sumS
         maxObj = element
       }
-      if(min> sumS || min == 0){
+      if(min > sumS || min == 0){
+        console.log("if", sumS);
         min = sumS;
         minObj = element
       }
-    });
+    }); 
     console.log("Sweden",sumSweden);
 
     //low-2
@@ -160,6 +161,7 @@ fetch("https://northwind.vercel.app/api/orders")
 
     console.log("Min Sweden", minObj)
 
+    console.log(min)
 
     //low-4
 
@@ -167,3 +169,17 @@ fetch("https://northwind.vercel.app/api/orders")
 
 
   });
+
+
+  Array.prototype.customEvery = function(cb){
+    for(let i = 0; i<this.length; i++){
+      if(!cb(this[i], i, this)){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  let arr = [2,4,6]
+  let res = arr.customEvery((x) => x % 2 == 0);
+  console.log(res)
